@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b18">
+
+<title>Stock Learners 📈</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    min-height:100%;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    padding:25px 14px;
+
+    /* BLUE + GREEN BACKGROUND LIGHT */
+    background:
+      radial-gradient(circle at 20% 15%,
+        rgba(0,170,255,.28),
+        transparent 25%),
+      radial-gradient(circle at 85% 30%,
+        rgba(0,255,180,.20),
+        transparent 28%),
+      radial-gradient(circle at 50% 100%,
+        rgba(40,40,180,.25),
+        transparent 35%),
+      linear-gradient(
+        145deg,
+        #030711 0%,
+        #071426 45%,
+        #071d25 70%,
+        #11133b 100%
+      );
+}
+
+/* SOFT NEON LIGHT */
+body:before{
+    content:"";
+    position:fixed;
+    width:280px;
+    height:280px;
+    top:15%;
+    left:-120px;
+    background:#00aaff;
+    opacity:.10;
+    filter:blur(90px);
+    border-radius:50%;
+    pointer-events:none;
+}
+
+body:after{
+    content:"";
+    position:fixed;
+    width:300px;
+    height:300px;
+    bottom:5%;
+    right:-140px;
+    background:#00ffb0;
+    opacity:.09;
+    filter:blur(100px);
+    border-radius:50%;
+    pointer-events:none;
+}
+
+.container{
+    width:100%;
+    max-width:480px;
+    position:relative;
+    z-index:2;
+}
+
+.card{
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    padding:55px 22px 45px;
+
+    border-radius:30px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(8,20,40,.96),
+        rgba(5,16,30,.93)
+      );
+
+    /* BLUE + GREEN BORDER */
+    border:1px solid rgba(50,220,200,.55);
+
+    box-shadow:
+      0 20px 70px rgba(0,0,0,.65),
+      0 0 25px rgba(0,160,255,.18),
+      0 0 45px rgba(0,255,180,.10),
+      inset 0 0 35px rgba(0,180,255,.045);
+}
+
+/* TOP LIGHT */
+.card:before{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:180px;
+    top:-100px;
+    left:50%;
+    transform:translateX(-50%);
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(0,220,255,.30),
+        rgba(0,255,170,.12),
+        transparent 70%
+      );
+
+    filter:blur(18px);
+    pointer-events:none;
+}
+
+/* SIDE GREEN LIGHT */
+.card:after{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:400px;
+    right:-100px;
+    top:35%;
+    background:#00ffb0;
+    opacity:.08;
+    filter:blur(50px);
+    transform:rotate(25deg);
+    pointer-events:none;
+}
+
+
+/* PROFILE PHOTO */
+.profile{
+    position:relative;
+    width:145px;
+    height:145px;
+
+    object-fit:cover;
+    border-radius:50%;
+
+    background:#fff;
+
+    border:5px solid #62dfbd;
+
+    box-shadow:
+      0 0 0 5px rgba(0,200,255,.12),
+      0 0 18px rgba(0,255,190,.55),
+      0 0 40px rgba(0,170,255,.40),
+      0 0 70px rgba(0,255,180,.18);
+}
+
+
+/* TITLE */
+.title{
+    margin-top:30px;
+
+    font-size:40px;
+    font-weight:800;
+
+    letter-spacing:-1px;
+
+    /* BLUE-GREEN TEXT */
+    background:
+      linear-gradient(
+        90deg,
+        #25e0bd,
+        #22c8ff,
+        #25e0bd
+      );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+
+    text-shadow:
+      0 0 20px rgba(0,220,200,.18);
+}
+
+.title span{
+    font-size:34px;
+}
+
+
+/* SUBTITLE */
+.subtitle{
+    margin-top:10px;
+
+    color:#aab9cc;
+
+    font-size:14px;
+
+    letter-spacing:.3px;
+}
+
+
+/* FEATURES */
+.features{
+    margin-top:40px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:25px;
+}
+
+.feature{
+    display:flex;
+    align-items:center;
+
+    text-align:left;
+
+    gap:15px;
+}
+
+.icon{
+    width:46px;
+    height:46px;
+    min-width:46px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:13px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(0,180,255,.12),
+        rgba(0,255,180,.08)
+      );
+
+    border:1px solid rgba(70,220,220,.20);
+
+    font-size:23px;
+
+    box-shadow:
+      0 0 15px rgba(0,180,255,.10),
+      inset 0 0 15px rgba(0,255,180,.05);
+}
+
+.feature h3{
+    font-size:19px;
+    line-height:1.35;
+
+    color:#f5f9ff;
+
+    text-shadow:
+      0 0 12px rgba(255,255,255,.08);
+}
+
+
+/* JOIN BUTTON */
+.join-btn{
+    display:block;
+
+    margin:40px auto 0;
+
+    max-width:350px;
+
+    padding:18px 20px;
+
+    border-radius:60px;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:21px;
+    font-weight:bold;
+
+    background:
+      linear-gradient(
+        100deg,
+        #078fe0,
+        #08b5e8,
+        #08cfa9
+      );
+
+    border:1px solid rgba(255,255,255,.22);
+
+    box-shadow:
+      0 0 15px rgba(0,180,255,.45),
+      0 0 35px rgba(0,220,190,.25),
+      0 12px 35px rgba(0,120,220,.35),
+      inset 0 1px 0 rgba(255,255,255,.30);
+
+    transition:.25s ease;
+}
+
+.join-btn:hover{
+    transform:translateY(-3px) scale(1.01);
+
+    box-shadow:
+      0 0 25px rgba(0,220,255,.55),
+      0 0 45px rgba(0,255,180,.30),
+      0 15px 45px rgba(0,120,220,.40);
+}
+
+.telegram{
+    display:inline-flex;
+
+    justify-content:center;
+    align-items:center;
+
+    width:35px;
+    height:35px;
+
+    background:white;
+    color:#079fe5;
+
+    border-radius:50%;
+
+    margin-right:8px;
+
+    font-size:18px;
+
+    box-shadow:
+      0 0 15px rgba(255,255,255,.25);
+}
+
+
+/* DISCLAIMER */
+.disclaimer{
+    margin:28px auto 0;
+
+    max-width:390px;
+
+    color:#7e8ea5;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+.footer{
+    text-align:center;
+
+    margin-top:18px;
+
+    color:#5e6d83;
+
+    font-size:11px;
+}
+
+
+/* MOBILE */
+@media(max-width:380px){
+
+    body{
+        padding:20px 10px;
+    }
+
+    .card{
+        padding:42px 16px;
+    }
+
+    .profile{
+        width:125px;
+        height:125px;
+    }
+
+    .title{
+        font-size:34px;
+    }
+
+    .title span{
+        font-size:28px;
+    }
+
+    .feature h3{
+        font-size:17px;
+    }
+
+    .join-btn{
+        font-size:18px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+    <!-- APNI PHOTO profile.jpg KE NAAM SE RAKHE -->
+    <img
+        src="profile.jpg"
+        class="profile"
+        alt="Stock Learners"
+    >
+
+
+    <div class="title">
+        Stock Learners <span>📈</span>
+    </div>
+
+
+    <div class="subtitle">
+        Learn • Analyse • Trade Responsibly
+    </div>
+
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="icon">
+                🎯
+            </div>
+
+            <h3>
+                Daily Nifty &amp; BankNifty Setup
+            </h3>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                📊
+            </div>
+
+            <h3>
+                Options Trading Education
+            </h3>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                🛡️
+            </div>
+
+            <h3>
+                Proper Risk Management
+            </h3>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- APNA TELEGRAM LINK YAHAN LAGAYE -->
+    <a
+        href="https://t.me/YOUR_CHANNEL"
+        class="join-btn"
+    >
+
+        <span class="telegram">
+            ➤
+        </span>
+
+        Join Stock Learners
+
+    </a>
+
+
+    <div class="disclaimer">
+
+        Trading and investing involve risk.
+        Stock Learners is for educational
+        and informational purposes only.
+        No guaranteed returns are provided.
+
+    </div>
+
+
+</div>
+
+
+<div class="footer">
+    © 2026 Stock Learners
+</div>
+
+
+</div>
+
+</body>
+</html>
