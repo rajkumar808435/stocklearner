@@ -2,29 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#070b18">
 
-<title>Stock Learner 📊</title>
+<title>Stock Learner </title>
 
-<!-- FACEBOOK PIXEL -->
+<!-- ================= FACEBOOK PIXEL ================= -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];
-t=b.createElement(e);t.async=!0;
-t.src=v;
-s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}
-(window,document,'script',
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 
 const PIXEL_ID = "YOUR_PIXEL_ID";
 
-if(PIXEL_ID !== "YOUR_PIXEL_ID"){
+if (PIXEL_ID !== "YOUR_PIXEL_ID") {
     fbq('init', PIXEL_ID);
     fbq('track', 'PageView');
 }
@@ -43,160 +39,538 @@ src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1">
     box-sizing:border-box;
 }
 
+html,body{
+    min-height:100%;
+}
+
 body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
+    overflow-x:hidden;
+
+    background:
+    radial-gradient(
+        circle at 50% 15%,
+        rgba(0,220,190,.15),
+        transparent 28%
+    ),
+    radial-gradient(
+        circle at 15% 80%,
+        rgba(0,130,255,.14),
+        transparent 30%
+    ),
+    linear-gradient(
+        145deg,
+        #040814,
+        #0a1021 55%,
+        #151033
+    );
+}
+
+/* BACKGROUND GLOW */
+
+.glow{
+    position:fixed;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    filter:blur(65px);
+    opacity:.28;
+    pointer-events:none;
+}
+
+.glow.one{
+    background:#00e5b0;
+    top:60px;
+    left:-100px;
+}
+
+.glow.two{
+    background:#168cff;
+    bottom:60px;
+    right:-100px;
+}
+
+/* MAIN */
+
+.page{
     min-height:100vh;
     display:flex;
     justify-content:center;
-    align-items:center;
-    padding:10px;
-    font-family:Arial,sans-serif;
-    color:#fff;
-    background:
-    radial-gradient(circle at 50% 10%,rgba(0,220,190,.14),transparent 30%),
-    linear-gradient(145deg,#040814,#0b1225 55%,#151033);
+    padding:16px 10px 25px;
 }
+
+/* CARD */
 
 .card{
     width:100%;
-    max-width:480px;
-    padding:20px 15px;
+    max-width:560px;
+
+    border:1px solid rgba(0,245,205,.30);
+    border-radius:25px;
+
+    padding:25px 17px 22px;
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(17,27,49,.97),
+        rgba(7,14,29,.97)
+    );
+
+    box-shadow:
+    0 0 30px rgba(0,230,190,.09),
+    inset 0 0 40px rgba(0,150,255,.04);
+
+    position:relative;
+    overflow:hidden;
+
     text-align:center;
-    border-radius:22px;
-    border:1px solid rgba(0,245,205,.28);
-    background:linear-gradient(180deg,#111b31f7,#070e1df7);
-    box-shadow:0 0 30px rgba(0,220,190,.10);
+}
+
+/* CARD LIGHT */
+
+.card:before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+
+    border-radius:27px;
+
+    background:
+    linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(0,255,205,.12),
+        transparent 45%,
+        rgba(0,140,255,.08),
+        transparent 70%
+    );
+
+    pointer-events:none;
 }
 
 /* PROFILE */
 
 .profile-wrap{
-    width:115px;
-    height:115px;
-    margin:0 auto 13px;
-    padding:5px;
+    width:145px;
+    height:145px;
+
+    margin:2px auto 17px;
+
+    padding:6px;
+
     border-radius:50%;
-    background:linear-gradient(135deg,#5effd0,#42b8ff,#64ffca);
-    box-shadow:0 0 25px rgba(50,220,200,.3);
+
+    background:
+    linear-gradient(
+        135deg,
+        #5effd0,
+        #42b8ff,
+        #64ffca
+    );
+
+    box-shadow:
+    0 0 18px rgba(55,255,205,.38),
+    0 0 45px rgba(35,150,255,.18);
+
+    position:relative;
+    z-index:2;
+}
+
+.profile-wrap:after{
+    content:"";
+
+    position:absolute;
+    inset:-8px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(68,255,210,.23);
+
+    animation:pulse 2.5s ease-in-out infinite;
 }
 
 .profile{
     width:100%;
     height:100%;
+
     display:block;
+
     border-radius:50%;
+
     object-fit:cover;
+    object-position:center;
+
+    background:#fff;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:scale(1);
+        opacity:.25;
+    }
+
+    50%{
+        transform:scale(1.06);
+        opacity:.7;
+    }
+
 }
 
 /* TITLE */
 
 .title{
-    font-size:28px;
+    font-size:32px;
+    line-height:1.1;
+
     font-weight:800;
-    margin-bottom:6px;
-    background:linear-gradient(90deg,#19d8ba,#58f5d2,#36a9ff);
+
+    letter-spacing:-.7px;
+
+    margin-bottom:7px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #19d8ba,
+        #58f5d2,
+        #36a9ff
+    );
+
     -webkit-background-clip:text;
     background-clip:text;
+
     color:transparent;
+
+    position:relative;
+    z-index:2;
 }
 
 /* SUBTITLE */
 
 .subtitle{
-    color:#aebbd0;
-    font-size:12px;
-    line-height:1.4;
-    margin-bottom:14px;
+    color:#b9c4d9;
+
+    font-size:13px;
+    line-height:1.45;
+
+    margin:0 auto 19px;
+
+    max-width:430px;
+
+    position:relative;
+    z-index:2;
 }
 
 /* FEATURES */
 
 .features{
     display:grid;
-    gap:7px;
-    margin-bottom:15px;
+    gap:9px;
+
+    margin:0 auto 19px;
+
+    max-width:500px;
+
+    position:relative;
+    z-index:2;
 }
 
 .feature{
     display:flex;
     align-items:center;
-    gap:9px;
+
+    gap:11px;
+
     text-align:left;
-    padding:9px;
-    border-radius:12px;
+
+    padding:11px 12px;
+
+    border-radius:14px;
+
     background:rgba(255,255,255,.035);
+
     border:1px solid rgba(255,255,255,.06);
+
+    box-shadow:
+    inset 0 0 15px rgba(0,160,255,.025);
 }
 
 .icon{
-    width:32px;
-    height:32px;
-    min-width:32px;
+    width:37px;
+    height:37px;
+
+    min-width:37px;
+
     display:grid;
     place-items:center;
-    border-radius:9px;
+
+    border-radius:11px;
+
     background:rgba(0,210,180,.09);
-    font-size:16px;
+
+    font-size:19px;
 }
 
 .feature strong{
     display:block;
-    font-size:13px;
+
+    font-size:15px;
+
+    line-height:1.2;
 }
 
 .feature span{
     display:block;
-    margin-top:2px;
-    color:#9da9bd;
-    font-size:10px;
+
+    color:#aeb8ca;
+
+    font-size:11px;
+
+    margin-top:3px;
 }
 
-/* BUTTON */
+/* JOIN BUTTON */
 
 .join-btn{
+
     width:100%;
-    min-height:58px;
+    max-width:440px;
+
+    min-height:68px;
+
     border:0;
-    border-radius:17px;
+
+    border-radius:21px;
+
+    padding:9px 16px;
+
     color:#fff;
-    background:linear-gradient(135deg,#08aeea,#168dff 50%,#08c9ad);
-    box-shadow:0 0 18px rgba(0,170,255,.35);
-    font-size:17px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #08aeea,
+        #168dff 50%,
+        #08c9ad
+    );
+
+    box-shadow:
+    0 0 18px rgba(0,170,255,.38),
+    0 8px 28px rgba(0,130,255,.18);
+
+    font-size:18px;
+
     font-weight:800;
+
     cursor:pointer;
+
+    transition:.18s ease;
+
+    position:relative;
+
+    z-index:2;
+
+    overflow:hidden;
 }
 
+.join-btn:before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-90%;
+
+    width:55%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.28),
+        transparent
+    );
+
+    transform:skewX(-18deg);
+
+    animation:shine 3s infinite;
+}
+
+@keyframes shine{
+
+    0%{
+        left:-90%;
+    }
+
+    45%,100%{
+        left:135%;
+    }
+
+}
+
+.join-btn:active{
+    transform:scale(.97);
+}
+
+/* TELEGRAM ICON */
+
 .telegram-icon{
+
     display:inline-grid;
+
     place-items:center;
-    width:29px;
-    height:29px;
-    margin-right:5px;
+
+    width:35px;
+    height:35px;
+
     border-radius:50%;
+
     background:#fff;
+
     color:#1499dc;
+
+    margin-right:7px;
+
     vertical-align:middle;
+
+    font-size:19px;
 }
 
 .small{
+
     display:block;
-    margin-top:3px;
-    font-size:9px;
+
+    margin-top:5px;
+
+    font-size:11px;
+
     font-weight:500;
+
+    opacity:.88;
 }
 
-/* NOTE */
+/* DISCLAIMER */
 
 .note{
-    color:#7f8ba1;
-    font-size:9px;
-    line-height:1.4;
-    margin-top:11px;
+
+    color:#8f9ab1;
+
+    font-size:11px;
+
+    line-height:1.45;
+
+    max-width:440px;
+
+    margin:16px auto 0;
+
+    position:relative;
+
+    z-index:2;
 }
 
+/* FOOTER */
+
 .footer{
-    margin-top:9px;
-    color:#667188;
-    font-size:9px;
+
+    margin-top:15px;
+
+    color:#707b94;
+
+    font-size:10px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+    .page{
+        padding:10px 8px 18px;
+    }
+
+    .card{
+        border-radius:22px;
+        padding:22px 13px 19px;
+    }
+
+    .profile-wrap{
+        width:130px;
+        height:130px;
+        margin-bottom:15px;
+    }
+
+    .title{
+        font-size:29px;
+    }
+
+    .subtitle{
+        font-size:12px;
+        margin-bottom:17px;
+    }
+
+    .feature{
+        padding:10px 10px;
+        gap:10px;
+    }
+
+    .feature strong{
+        font-size:14px;
+    }
+
+    .feature span{
+        font-size:10px;
+    }
+
+    .icon{
+        width:34px;
+        height:34px;
+        min-width:34px;
+        font-size:17px;
+    }
+
+    .join-btn{
+        min-height:64px;
+        font-size:17px;
+        border-radius:19px;
+    }
+
+    .telegram-icon{
+        width:32px;
+        height:32px;
+        font-size:17px;
+    }
+
+}
+
+/* VERY SMALL PHONES */
+
+@media(max-width:360px){
+
+    .profile-wrap{
+        width:115px;
+        height:115px;
+    }
+
+    .title{
+        font-size:26px;
+    }
+
+    .feature strong{
+        font-size:13px;
+    }
+
+    .join-btn{
+        font-size:16px;
+    }
+
 }
 
 </style>
@@ -204,110 +578,176 @@ body{
 
 <body>
 
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<main class="page">
+
 <section class="card">
 
 <div class="profile-wrap">
+
 <img
     class="profile"
     src="profile.jpg"
-    alt="Stock Learner"
+    alt="Channel Profile"
 >
+
 </div>
 
 <h1 class="title">
-Stock Learner 📊
+    Stock Learning 📈
 </h1>
 
 <p class="subtitle">
-Daily market learning, setups & trading education.
+
+Daily market learning, setups & trading education —
+simple, clear and mobile friendly.
+
 </p>
 
 <div class="features">
 
 <div class="feature">
-<div class="icon">🎯</div>
-<div>
-<strong>Nifty & BankNifty Setup</strong>
-<span>Market levels & educational analysis</span>
+
+<div class="icon">
+    🎯
 </div>
+
+<div>
+
+<strong>
+Daily Nifty & BankNifty Setup
+</strong>
+
+<span>
+Market levels & educational analysis
+</span>
+
+</div>
+
 </div>
 
 <div class="feature">
-<div class="icon">📊</div>
-<div>
-<strong>Options Trading Education</strong>
-<span>Charts, setups & market concepts</span>
+
+<div class="icon">
+    📊
 </div>
+
+<div>
+
+<strong>
+Options Trading Education
+</strong>
+
+<span>
+Learn setups, charts & market concepts
+</span>
+
+</div>
+
 </div>
 
 <div class="feature">
-<div class="icon">🛡️</div>
+
+<div class="icon">
+    🛡️
+</div>
+
 <div>
-<strong>Risk Management</strong>
-<span>Learn responsible trading practices</span>
+
+<strong>
+Proper Risk Management
+</strong>
+
+<span>
+Learn how to manage risk responsibly
+</span>
+
 </div>
+
 </div>
 
 </div>
 
-<button class="join-btn" onclick="joinTelegram()">
+<button
+    class="join-btn"
+    onclick="joinTelegram()"
+>
 
-<span class="telegram-icon">➤</span>
+<span class="telegram-icon">
+    ➤
+</span>
+
 Join Premium Free
 
 <span class="small">
-Tap to continue on Telegram
+    Tap to continue on Telegram
 </span>
 
 </button>
 
 <p class="note">
-Trading involves risk. Educational purposes only.
-No guaranteed profits or returns.
+
+Trading involves risk. This page/channel is for
+educational purposes only and does not guarantee
+profits or returns.
+
 </p>
 
 <div class="footer">
-© 2026 Stock Learner
+
+© 2026 Stock Learning • Educational Community
+
 </div>
 
 </section>
 
+</main>
+
 <script>
 
-/* TELEGRAM LINK */
+/* =========================================
+   TELEGRAM CHANNEL LINK
+   ========================================= */
 
 const TELEGRAM_LINK =
 "https://t.me/+FnghiTGcmpJiNmVl";
 
 
-/* PIXEL ID */
+/* =========================================
+   PIXEL ID
+   ========================================= */
 
 const PIXEL_ID_FOR_EVENT =
 "YOUR_PIXEL_ID";
 
 
-/* JOIN BUTTON */
+/* =========================================
+   JOIN BUTTON FUNCTION
+   ========================================= */
 
 function joinTelegram(){
 
-    /*
-       ONLY WHEN USER CLICKS THE BUTTON
-       SEND ONE Subscribe EVENT
-    */
+    /* Meta Pixel Lead Event */
 
     if(
         typeof fbq === "function" &&
         PIXEL_ID_FOR_EVENT !== "YOUR_PIXEL_ID"
     ){
 
-        fbq('track','Subscribe');
+        fbq(
+            'track',
+            'Lead'
+        );
+
     }
 
-    /*
-       OPEN TELEGRAM
-    */
+    /* Open Telegram */
 
-    window.location.href = TELEGRAM_LINK;
+    window.location.href =
+        TELEGRAM_LINK;
+
 }
 
 </script>
