@@ -3,11 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050b18">
+<meta name="theme-color" content="#070b18">
 
-<title>Stock Learners 📈</title>
+<title>Stock Learning 📈</title>
+
+<!-- ================= FACEBOOK PIXEL ================= -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+const PIXEL_ID = "YOUR_PIXEL_ID";
+
+if (PIXEL_ID !== "YOUR_PIXEL_ID") {
+    fbq('init', PIXEL_ID);
+    fbq('track', 'PageView');
+}
+</script>
+
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1">
+</noscript>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -19,486 +44,713 @@ html,body{
 }
 
 body{
-    min-height:100vh;
     font-family:Arial,Helvetica,sans-serif;
     color:#fff;
+    overflow-x:hidden;
+
+    background:
+    radial-gradient(
+        circle at 50% 15%,
+        rgba(0,220,190,.15),
+        transparent 28%
+    ),
+    radial-gradient(
+        circle at 15% 80%,
+        rgba(0,130,255,.14),
+        transparent 30%
+    ),
+    linear-gradient(
+        145deg,
+        #040814,
+        #0a1021 55%,
+        #151033
+    );
+}
+
+/* BACKGROUND GLOW */
+
+.glow{
+    position:fixed;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    filter:blur(65px);
+    opacity:.28;
+    pointer-events:none;
+}
+
+.glow.one{
+    background:#00e5b0;
+    top:60px;
+    left:-100px;
+}
+
+.glow.two{
+    background:#168cff;
+    bottom:60px;
+    right:-100px;
+}
+
+/* MAIN */
+
+.page{
+    min-height:100vh;
     display:flex;
     justify-content:center;
-    padding:25px 14px;
-
-    /* BLUE + GREEN BACKGROUND LIGHT */
-    background:
-      radial-gradient(circle at 20% 15%,
-        rgba(0,170,255,.28),
-        transparent 25%),
-      radial-gradient(circle at 85% 30%,
-        rgba(0,255,180,.20),
-        transparent 28%),
-      radial-gradient(circle at 50% 100%,
-        rgba(40,40,180,.25),
-        transparent 35%),
-      linear-gradient(
-        145deg,
-        #030711 0%,
-        #071426 45%,
-        #071d25 70%,
-        #11133b 100%
-      );
+    padding:16px 10px 25px;
 }
 
-/* SOFT NEON LIGHT */
-body:before{
-    content:"";
-    position:fixed;
-    width:280px;
-    height:280px;
-    top:15%;
-    left:-120px;
-    background:#00aaff;
-    opacity:.10;
-    filter:blur(90px);
-    border-radius:50%;
-    pointer-events:none;
-}
+/* CARD */
 
-body:after{
-    content:"";
-    position:fixed;
-    width:300px;
-    height:300px;
-    bottom:5%;
-    right:-140px;
-    background:#00ffb0;
-    opacity:.09;
-    filter:blur(100px);
-    border-radius:50%;
-    pointer-events:none;
-}
-
-.container{
+.card{
     width:100%;
-    max-width:480px;
+    max-width:560px;
+
+    border:1px solid rgba(0,245,205,.30);
+    border-radius:25px;
+
+    padding:25px 17px 22px;
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(17,27,49,.97),
+        rgba(7,14,29,.97)
+    );
+
+    box-shadow:
+    0 0 30px rgba(0,230,190,.09),
+    inset 0 0 40px rgba(0,150,255,.04);
+
+    position:relative;
+    overflow:hidden;
+
+    text-align:center;
+}
+
+/* CARD LIGHT */
+
+.card:before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+
+    border-radius:27px;
+
+    background:
+    linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(0,255,205,.12),
+        transparent 45%,
+        rgba(0,140,255,.08),
+        transparent 70%
+    );
+
+    pointer-events:none;
+}
+
+/* PROFILE */
+
+.profile-wrap{
+    width:145px;
+    height:145px;
+
+    margin:2px auto 17px;
+
+    padding:6px;
+
+    border-radius:50%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #5effd0,
+        #42b8ff,
+        #64ffca
+    );
+
+    box-shadow:
+    0 0 18px rgba(55,255,205,.38),
+    0 0 45px rgba(35,150,255,.18);
+
     position:relative;
     z-index:2;
 }
 
-.card{
-    position:relative;
-    overflow:hidden;
-    text-align:center;
-    padding:55px 22px 45px;
-
-    border-radius:30px;
-
-    background:
-      linear-gradient(
-        145deg,
-        rgba(8,20,40,.96),
-        rgba(5,16,30,.93)
-      );
-
-    /* BLUE + GREEN BORDER */
-    border:1px solid rgba(50,220,200,.55);
-
-    box-shadow:
-      0 20px 70px rgba(0,0,0,.65),
-      0 0 25px rgba(0,160,255,.18),
-      0 0 45px rgba(0,255,180,.10),
-      inset 0 0 35px rgba(0,180,255,.045);
-}
-
-/* TOP LIGHT */
-.card:before{
+.profile-wrap:after{
     content:"";
+
     position:absolute;
-    width:280px;
-    height:180px;
-    top:-100px;
-    left:50%;
-    transform:translateX(-50%);
+    inset:-8px;
 
-    background:
-      radial-gradient(
-        circle,
-        rgba(0,220,255,.30),
-        rgba(0,255,170,.12),
-        transparent 70%
-      );
-
-    filter:blur(18px);
-    pointer-events:none;
-}
-
-/* SIDE GREEN LIGHT */
-.card:after{
-    content:"";
-    position:absolute;
-    width:120px;
-    height:400px;
-    right:-100px;
-    top:35%;
-    background:#00ffb0;
-    opacity:.08;
-    filter:blur(50px);
-    transform:rotate(25deg);
-    pointer-events:none;
-}
-
-
-/* PROFILE PHOTO */
-.profile{
-    position:relative;
-    width:145px;
-    height:145px;
-
-    object-fit:cover;
     border-radius:50%;
 
-    background:#fff;
+    border:1px solid rgba(68,255,210,.23);
 
-    border:5px solid #62dfbd;
-
-    box-shadow:
-      0 0 0 5px rgba(0,200,255,.12),
-      0 0 18px rgba(0,255,190,.55),
-      0 0 40px rgba(0,170,255,.40),
-      0 0 70px rgba(0,255,180,.18);
+    animation:pulse 2.5s ease-in-out infinite;
 }
 
+.profile{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    border-radius:50%;
+
+    object-fit:cover;
+    object-position:center;
+
+    background:#fff;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:scale(1);
+        opacity:.25;
+    }
+
+    50%{
+        transform:scale(1.06);
+        opacity:.7;
+    }
+
+}
 
 /* TITLE */
-.title{
-    margin-top:30px;
 
-    font-size:40px;
+.title{
+    font-size:32px;
+    line-height:1.1;
+
     font-weight:800;
 
-    letter-spacing:-1px;
+    letter-spacing:-.7px;
 
-    /* BLUE-GREEN TEXT */
+    margin-bottom:7px;
+
     background:
-      linear-gradient(
+    linear-gradient(
         90deg,
-        #25e0bd,
-        #22c8ff,
-        #25e0bd
-      );
+        #19d8ba,
+        #58f5d2,
+        #36a9ff
+    );
 
     -webkit-background-clip:text;
     background-clip:text;
+
     color:transparent;
 
-    text-shadow:
-      0 0 20px rgba(0,220,200,.18);
+    position:relative;
+    z-index:2;
 }
-
-.title span{
-    font-size:34px;
-}
-
 
 /* SUBTITLE */
+
 .subtitle{
-    margin-top:10px;
+    color:#b9c4d9;
 
-    color:#aab9cc;
+    font-size:13px;
+    line-height:1.45;
 
-    font-size:14px;
+    margin:0 auto 19px;
 
-    letter-spacing:.3px;
+    max-width:430px;
+
+    position:relative;
+    z-index:2;
 }
 
-
 /* FEATURES */
+
 .features{
-    margin-top:40px;
+    display:grid;
+    gap:9px;
 
-    display:flex;
-    flex-direction:column;
+    margin:0 auto 19px;
 
-    gap:25px;
+    max-width:500px;
+
+    position:relative;
+    z-index:2;
 }
 
 .feature{
     display:flex;
     align-items:center;
 
+    gap:11px;
+
     text-align:left;
 
-    gap:15px;
+    padding:11px 12px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.035);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    box-shadow:
+    inset 0 0 15px rgba(0,160,255,.025);
 }
 
 .icon{
-    width:46px;
-    height:46px;
-    min-width:46px;
+    width:37px;
+    height:37px;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    min-width:37px;
 
-    border-radius:13px;
+    display:grid;
+    place-items:center;
 
-    background:
-      linear-gradient(
-        145deg,
-        rgba(0,180,255,.12),
-        rgba(0,255,180,.08)
-      );
+    border-radius:11px;
 
-    border:1px solid rgba(70,220,220,.20);
+    background:rgba(0,210,180,.09);
 
-    font-size:23px;
-
-    box-shadow:
-      0 0 15px rgba(0,180,255,.10),
-      inset 0 0 15px rgba(0,255,180,.05);
-}
-
-.feature h3{
     font-size:19px;
-    line-height:1.35;
-
-    color:#f5f9ff;
-
-    text-shadow:
-      0 0 12px rgba(255,255,255,.08);
 }
 
-
-/* JOIN BUTTON */
-.join-btn{
+.feature strong{
     display:block;
 
-    margin:40px auto 0;
+    font-size:15px;
 
-    max-width:350px;
+    line-height:1.2;
+}
 
-    padding:18px 20px;
+.feature span{
+    display:block;
 
-    border-radius:60px;
+    color:#aeb8ca;
 
-    text-decoration:none;
+    font-size:11px;
 
-    color:white;
+    margin-top:3px;
+}
 
-    font-size:21px;
-    font-weight:bold;
+/* JOIN BUTTON */
+
+.join-btn{
+
+    width:100%;
+    max-width:440px;
+
+    min-height:68px;
+
+    border:0;
+
+    border-radius:21px;
+
+    padding:9px 16px;
+
+    color:#fff;
 
     background:
-      linear-gradient(
-        100deg,
-        #078fe0,
-        #08b5e8,
-        #08cfa9
-      );
-
-    border:1px solid rgba(255,255,255,.22);
+    linear-gradient(
+        135deg,
+        #08aeea,
+        #168dff 50%,
+        #08c9ad
+    );
 
     box-shadow:
-      0 0 15px rgba(0,180,255,.45),
-      0 0 35px rgba(0,220,190,.25),
-      0 12px 35px rgba(0,120,220,.35),
-      inset 0 1px 0 rgba(255,255,255,.30);
+    0 0 18px rgba(0,170,255,.38),
+    0 8px 28px rgba(0,130,255,.18);
 
-    transition:.25s ease;
+    font-size:18px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.18s ease;
+
+    position:relative;
+
+    z-index:2;
+
+    overflow:hidden;
 }
 
-.join-btn:hover{
-    transform:translateY(-3px) scale(1.01);
+.join-btn:before{
 
-    box-shadow:
-      0 0 25px rgba(0,220,255,.55),
-      0 0 45px rgba(0,255,180,.30),
-      0 15px 45px rgba(0,120,220,.40);
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-90%;
+
+    width:55%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.28),
+        transparent
+    );
+
+    transform:skewX(-18deg);
+
+    animation:shine 3s infinite;
 }
 
-.telegram{
-    display:inline-flex;
+@keyframes shine{
 
-    justify-content:center;
-    align-items:center;
+    0%{
+        left:-90%;
+    }
+
+    45%,100%{
+        left:135%;
+    }
+
+}
+
+.join-btn:active{
+    transform:scale(.97);
+}
+
+/* TELEGRAM ICON */
+
+.telegram-icon{
+
+    display:inline-grid;
+
+    place-items:center;
 
     width:35px;
     height:35px;
 
-    background:white;
-    color:#079fe5;
-
     border-radius:50%;
 
-    margin-right:8px;
+    background:#fff;
 
-    font-size:18px;
+    color:#1499dc;
 
-    box-shadow:
-      0 0 15px rgba(255,255,255,.25);
+    margin-right:7px;
+
+    vertical-align:middle;
+
+    font-size:19px;
 }
 
+.small{
 
-/* DISCLAIMER */
-.disclaimer{
-    margin:28px auto 0;
+    display:block;
 
-    max-width:390px;
-
-    color:#7e8ea5;
-
-    font-size:12px;
-
-    line-height:1.7;
-}
-
-.footer{
-    text-align:center;
-
-    margin-top:18px;
-
-    color:#5e6d83;
+    margin-top:5px;
 
     font-size:11px;
+
+    font-weight:500;
+
+    opacity:.88;
 }
 
+/* DISCLAIMER */
+
+.note{
+
+    color:#8f9ab1;
+
+    font-size:11px;
+
+    line-height:1.45;
+
+    max-width:440px;
+
+    margin:16px auto 0;
+
+    position:relative;
+
+    z-index:2;
+}
+
+/* FOOTER */
+
+.footer{
+
+    margin-top:15px;
+
+    color:#707b94;
+
+    font-size:10px;
+
+    position:relative;
+
+    z-index:2;
+}
 
 /* MOBILE */
-@media(max-width:380px){
 
-    body{
-        padding:20px 10px;
+@media(max-width:480px){
+
+    .page{
+        padding:10px 8px 18px;
     }
 
     .card{
-        padding:42px 16px;
+        border-radius:22px;
+        padding:22px 13px 19px;
     }
 
-    .profile{
-        width:125px;
-        height:125px;
+    .profile-wrap{
+        width:130px;
+        height:130px;
+        margin-bottom:15px;
     }
 
     .title{
-        font-size:34px;
+        font-size:29px;
     }
 
-    .title span{
-        font-size:28px;
+    .subtitle{
+        font-size:12px;
+        margin-bottom:17px;
     }
 
-    .feature h3{
+    .feature{
+        padding:10px 10px;
+        gap:10px;
+    }
+
+    .feature strong{
+        font-size:14px;
+    }
+
+    .feature span{
+        font-size:10px;
+    }
+
+    .icon{
+        width:34px;
+        height:34px;
+        min-width:34px;
         font-size:17px;
     }
 
     .join-btn{
-        font-size:18px;
+        min-height:64px;
+        font-size:17px;
+        border-radius:19px;
     }
+
+    .telegram-icon{
+        width:32px;
+        height:32px;
+        font-size:17px;
+    }
+
 }
+
+/* VERY SMALL PHONES */
+
+@media(max-width:360px){
+
+    .profile-wrap{
+        width:115px;
+        height:115px;
+    }
+
+    .title{
+        font-size:26px;
+    }
+
+    .feature strong{
+        font-size:13px;
+    }
+
+    .join-btn{
+        font-size:16px;
+    }
+
+}
+
 </style>
 </head>
 
-
 <body>
 
-<div class="container">
+<div class="glow one"></div>
+<div class="glow two"></div>
 
-<div class="card">
+<main class="page">
 
-    <!-- APNI PHOTO profile.jpg KE NAAM SE RAKHE -->
-    <img
-        src="profile.jpg"
-        class="profile"
-        alt="Stock Learners"
-    >
+<section class="card">
 
+<div class="profile-wrap">
 
-    <div class="title">
-        Stock Learners <span>📈</span>
-    </div>
-
-
-    <div class="subtitle">
-        Learn • Analyse • Trade Responsibly
-    </div>
-
-
-    <div class="features">
-
-
-        <div class="feature">
-
-            <div class="icon">
-                🎯
-            </div>
-
-            <h3>
-                Daily Nifty &amp; BankNifty Setup
-            </h3>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="icon">
-                📊
-            </div>
-
-            <h3>
-                Options Trading Education
-            </h3>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="icon">
-                🛡️
-            </div>
-
-            <h3>
-                Proper Risk Management
-            </h3>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- APNA TELEGRAM LINK YAHAN LAGAYE -->
-    <a
-        href="https://t.me/YOUR_CHANNEL"
-        class="join-btn"
-    >
-
-        <span class="telegram">
-            ➤
-        </span>
-
-        Join Stock Learners
-
-    </a>
-
-
-    <div class="disclaimer">
-
-        Trading and investing involve risk.
-        Stock Learners is for educational
-        and informational purposes only.
-        No guaranteed returns are provided.
-
-    </div>
-
+<img
+    class="profile"
+    src="profile.jpg"
+    alt="Channel Profile"
+>
 
 </div>
 
+<h1 class="title">
+    Stock Learning 📈
+</h1>
+
+<p class="subtitle">
+
+Daily market learning, setups & trading education —
+simple, clear and mobile friendly.
+
+</p>
+
+<div class="features">
+
+<div class="feature">
+
+<div class="icon">
+    🎯
+</div>
+
+<div>
+
+<strong>
+Daily Nifty & BankNifty Setup
+</strong>
+
+<span>
+Market levels & educational analysis
+</span>
+
+</div>
+
+</div>
+
+<div class="feature">
+
+<div class="icon">
+    📊
+</div>
+
+<div>
+
+<strong>
+Options Trading Education
+</strong>
+
+<span>
+Learn setups, charts & market concepts
+</span>
+
+</div>
+
+</div>
+
+<div class="feature">
+
+<div class="icon">
+    🛡️
+</div>
+
+<div>
+
+<strong>
+Proper Risk Management
+</strong>
+
+<span>
+Learn how to manage risk responsibly
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<button
+    class="join-btn"
+    onclick="joinTelegram()"
+>
+
+<span class="telegram-icon">
+    ➤
+</span>
+
+Join Free Channel
+
+<span class="small">
+    Tap to continue on Telegram
+</span>
+
+</button>
+
+<p class="note">
+
+Trading involves risk. This page/channel is for
+educational purposes only and does not guarantee
+profits or returns.
+
+</p>
 
 <div class="footer">
-    © 2026 Stock Learners
+
+© 2026 Stock Learning • Educational Community
+
 </div>
 
+</section>
 
-</div>
+</main>
+
+<script>
+
+/* =========================================
+   TELEGRAM CHANNEL LINK
+   ========================================= */
+
+const TELEGRAM_LINK =
+"https://t.me/+FnghiTGcmpJiNmVl";
+
+
+/* =========================================
+   PIXEL ID
+   ========================================= */
+
+const PIXEL_ID_FOR_EVENT =
+"YOUR_PIXEL_ID";
+
+
+/* =========================================
+   JOIN BUTTON FUNCTION
+   ========================================= */
+
+function joinTelegram(){
+
+    /* Meta Pixel Lead Event */
+
+    if(
+        typeof fbq === "function" &&
+        PIXEL_ID_FOR_EVENT !== "YOUR_PIXEL_ID"
+    ){
+
+        fbq(
+            'track',
+            'Lead'
+        );
+
+    }
+
+    /* Open Telegram */
+
+    window.location.href =
+        TELEGRAM_LINK;
+
+}
+
+</script>
 
 </body>
 </html>
